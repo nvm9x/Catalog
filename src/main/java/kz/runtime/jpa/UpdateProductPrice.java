@@ -8,10 +8,15 @@ import kz.runtime.entity.Category;
 import java.util.Scanner;
 
 public class UpdateProductPrice {
+
     public static void main(String[] args) {
         //Ввести айди категории и все товары которые относятся к этой категори
         // и их стоимость должна быть увеличена н процент который вы вводите
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("main");
+        updatePrices();
+
+    }
+    public static void updatePrices(){
+        EntityManagerFactory factory = CentralFactory.createManager();
         EntityManager manager = factory.createEntityManager();
 
         try {
@@ -35,5 +40,7 @@ public class UpdateProductPrice {
             manager.getTransaction().rollback();
             throw new RuntimeException();
         }
+
+
     }
 }

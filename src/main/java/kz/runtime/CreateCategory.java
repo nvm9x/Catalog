@@ -6,13 +6,15 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import kz.runtime.entity.Category;
 import kz.runtime.entity.Description;
+import kz.runtime.jpa.CentralFactory;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class CreateCategory {
-    public static void main(String[] args) {
+
+    public static void createCategory(){
         //Задания
         // Добавить категорию category
         // Добавить характеристики description
@@ -26,7 +28,7 @@ public class CreateCategory {
         // Введите название характеристики: Мебель
         // Введите характеристики категории: страна производства, материал
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("main");
+        EntityManagerFactory factory = CentralFactory.createManager();
         EntityManager manager = factory.createEntityManager();
 
         try{
@@ -42,29 +44,29 @@ public class CreateCategory {
 
             TypedQuery<Long> categoryQuery = manager.createQuery("select count(c.id) from Category c where c.name = ?1",Long.class);
             categoryQuery.setParameter(1, categoryName);
-           long categoryCount= categoryQuery.getSingleResult();
-           while(categoryCount>0) {
-               System.out.println("Категория уже существует,введите еще раз");
-               categoryName = scanner.nextLine();
-               categoryQuery.setParameter(1,categoryName);
-               categoryCount=categoryQuery.getSingleResult();
+            long categoryCount= categoryQuery.getSingleResult();
+            while(categoryCount>0) {
+                System.out.println("Категория уже существует,введите еще раз");
+                categoryName = scanner.nextLine();
+                categoryQuery.setParameter(1,categoryName);
+                categoryCount=categoryQuery.getSingleResult();
 
-           }
+            }
 
-           Category category = new Category();
+            Category category = new Category();
 
-               category.setName(categoryName);
-               //
-               manager.persist(category);
+            category.setName(categoryName);
+            //
+            manager.persist(category);
 
-               for (int i = 0; i < array.length; i++) {
-                   Description description = new Description();
-                   description.setDescription(category);
-                   description.setName(array[i]);
-                   manager.persist(description);
+            for (int i = 0; i < array.length; i++) {
+                Description description = new Description();
+                description.setDescription(category);
+                description.setName(array[i]);
+                manager.persist(description);
 
-               }
-               manager.getTransaction().commit();
+            }
+            manager.getTransaction().commit();
 
 
 
@@ -77,5 +79,6 @@ public class CreateCategory {
 
         manager.close();
         factory.close();
+
     }
 }

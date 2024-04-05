@@ -5,12 +5,14 @@ import kz.runtime.entity.Category;
 import kz.runtime.entity.Description;
 import kz.runtime.entity.Product;
 import kz.runtime.entity.Value;
+import kz.runtime.jpa.CentralFactory;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class ProductChange {
-    public static void main(String[] args) {
+
+    public static void productChanege() {
 
         //Задания
         //  1--Если я не ввожу новую информацию,остается старая
@@ -29,7 +31,7 @@ public class ProductChange {
         //select для поиска значения харакеристики сделать
         //если нашел значит обновляю если нет - создаю
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("main");
+        EntityManagerFactory factory = CentralFactory.createManager();
         EntityManager manager = factory.createEntityManager();
 
         Scanner scanner = new Scanner(System.in);

@@ -13,19 +13,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CreateProduct {
-    public static void main(String[] args) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("main");
-        EntityManager manager = factory.createEntityManager();
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Добавить продукт");
-        String addProduct = scanner.nextLine();
-        System.out.println("Введите цену");
-        int addPrice = scanner.nextInt();
-        System.out.println("Введите значение продукта");
-        String productName = scanner.nextLine();
+        public static void createProduct() {
+            EntityManagerFactory factory = CentralFactory.createManager();
+            EntityManager manager = factory.createEntityManager();
 
-        Category category = manager.find(Category.class, 2);
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Добавить продукт");
+            String addProduct = scanner.nextLine();
+            System.out.println("Введите цену");
+            int addPrice = scanner.nextInt();
+            System.out.println("Введите значение продукта");
+            String productName = scanner.nextLine();
+
+            Category category = manager.find(Category.class, 2);
        /* TypedQuery<Category> categoryQuery = manager.createQuery("select c from Category c", Category.class);
         List<Category> categories = categoryQuery.getResultList();
         for (Category category1 : categories) {
@@ -43,7 +44,7 @@ public class CreateProduct {
                 for (int i = 0; i < category.getDescriptions().size(); i++) {
                     System.out.println("Введите значение характеристики для - " + category.getDescriptions().get(i).getName());
                     String valueName = scanner.nextLine();
-                    value.setName(productName);
+                    value.setName(valueName); //был productName
                     value.setDescription(category.getDescriptions().get(i));
                     value.setProduct(product);
                     manager.persist(value);
@@ -57,5 +58,6 @@ public class CreateProduct {
             manager.close();
             factory.close();
         }
-    }
+        }
+
 

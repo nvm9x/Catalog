@@ -9,8 +9,9 @@ import kz.runtime.entity.Product;
 import java.util.Scanner;
 
 public class DeleteCategory {
-    public static void main(String[] args) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("main");
+
+    public static void deleteCategory(){
+        EntityManagerFactory factory = CentralFactory.createManager();
         EntityManager manager = factory.createEntityManager();
         //удалить категорию
 

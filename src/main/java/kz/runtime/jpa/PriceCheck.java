@@ -7,10 +7,12 @@ import jakarta.persistence.Persistence;
 import java.util.Scanner;
 
 public class PriceCheck {
-    public static void main(String[] args) {
+
+    public static void priceCheck(){
         //Проверка на ввод числовых значений цены, а не строковых
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("main");
+        EntityManagerFactory factory = CentralFactory.createManager();
         EntityManager manager = factory.createEntityManager();
+
         Scanner scan = new Scanner(System.in);
 
        /* String price = scan.nextLine();
@@ -37,7 +39,5 @@ public class PriceCheck {
             }
             break;
         }
-
-
     }
 }

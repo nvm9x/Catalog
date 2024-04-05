@@ -8,8 +8,10 @@ import kz.runtime.entity.Value;
 
 
 public class ProductRemove {
-    public static void main(String[] args) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("main");
+
+
+    public static void productRemove(){
+        EntityManagerFactory factory = CentralFactory.createManager();
         EntityManager manager = factory.createEntityManager();
 
         Product product = manager.find(Product.class, 1);
@@ -31,7 +33,5 @@ public class ProductRemove {
         }
         manager.close();
         factory.close();
-
-
     }
 }
